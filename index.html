@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lecteur JSON</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      padding: 10px;
+      font-family: monospace;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    pre {
+      background: #272822;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 8px;
+      overflow: auto;
+    }
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Lecteur JSON</h1>
+  <textarea id="jsonInput" placeholder="Colle ton JSON ici..."></textarea>
+  <br>
+  <button onclick="parseJSON()">Lire le JSON</button>
+  <div id="output"></div>
+
+  <script>
+    function parseJSON() {
+      const input = document.getElementById("jsonInput").value;
+      const outputDiv = document.getElementById("output");
+
+      try {
+        const parsed = JSON.parse(input);
+        const formatted = JSON.stringify(parsed, null, 2);
+        outputDiv.innerHTML = `<pre>${formatted}</pre>`;
+      } catch (e) {
+        outputDiv.innerHTML = `<p class="error">Erreur : ${e.message}</p>`;
+      }
+    }
+  </script>
+</body>
+</html>
